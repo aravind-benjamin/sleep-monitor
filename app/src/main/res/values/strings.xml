@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Sleep Monitor</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="sessions">Sessions</string>
+    <string name="playback">Playback</string>
+    <string name="start_tracking">Start tracking</string>
+    <string name="tracking_started">Sleep tracking started</string>
+    <string name="mic_permission_required">Microphone permission is required to detect snoring and sleep talk</string>
+    <string name="notification_title">Sleep Monitor is listening</string>
+    <string name="notification_text">Recording sleep sounds\u2026 tap Stop when you wake up</string>
+    <string name="stop_tracking">Stop</string>
+    <string name="channel_name">Sleep Tracking</string>
+    <string name="add_manual_session">Add sleep entry</string>
+    <string name="snore_events">Snore events</string>
+    <string name="talk_events">Sleep talk events</string>
+    <string name="total_sleep">Total time tracked</string>
+    <string name="last_7_nights">Last 7 nights</string>
+    <string name="no_events">No sound events for this session yet.</string>
+    <string name="no_sessions">No sleep sessions yet. Tap the mic button to start tracking, or add one manually.</string>
+    <string name="play">Play</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+</resources>

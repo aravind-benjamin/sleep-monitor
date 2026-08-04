@@ -1,0 +1,9 @@
+<resources>
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="accent">#7986CB</color>
+    <color name="snore_color">#5C6BC0</color>
+    <color name="talk_color">#26A69A</color>
+    <color name="noise_color">#BDBDBD</color>
+    <color name="background">#F5F6FA</color>
+</resources>
