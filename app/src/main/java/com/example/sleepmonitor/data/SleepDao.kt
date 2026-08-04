@@ -26,6 +26,9 @@ interface SleepDao {
     @Query("SELECT * FROM sleep_sessions WHERE endTime IS NULL ORDER BY startTime DESC LIMIT 1")
     suspend fun getActiveSession(): SleepSession?
 
+    @Query("SELECT * FROM sleep_sessions WHERE endTime IS NULL ORDER BY startTime DESC LIMIT 1")
+    fun observeActiveSession(): LiveData<SleepSession?>
+
     // ---- Sound events ----
 
     @Insert

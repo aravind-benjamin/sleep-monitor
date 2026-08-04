@@ -5,6 +5,7 @@
     <string name="playback">Playback</string>
     <string name="start_tracking">Start tracking</string>
     <string name="tracking_started">Sleep tracking started</string>
+    <string name="tracking_stopped">Sleep tracking stopped</string>
     <string name="mic_permission_required">Microphone permission is required to detect snoring and sleep talk</string>
     <string name="notification_title">Sleep Monitor is listening</string>
     <string name="notification_text">Recording sleep sounds\u2026 tap Stop when you wake up</string>
