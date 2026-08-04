@@ -16,6 +16,7 @@ class SleepRepository(context: Context) {
         dao.updateSession(session.copy(endTime = endTime))
 
     suspend fun getActiveSession(): SleepSession? = dao.getActiveSession()
+    fun observeActiveSession() = dao.observeActiveSession()
 
     suspend fun addManualSession(session: SleepSession) = dao.insertSession(session)
 
