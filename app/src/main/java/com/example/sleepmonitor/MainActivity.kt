@@ -1,4 +1,3 @@
-cat << 'EOF'
 package com.example.sleepmonitor
 
 import android.Manifest
@@ -104,6 +103,7 @@ class MainActivity : AppCompatActivity() {
         ContextCompat.startForegroundService(this, intent)
         Snackbar.make(binding.root, R.string.tracking_started, Snackbar.LENGTH_SHORT).show()
     }
+
     private fun stopTrackingService() {
         val intent = Intent(this, SleepTrackingService::class.java).apply {
             action = SleepTrackingService.ACTION_STOP
@@ -112,4 +112,3 @@ class MainActivity : AppCompatActivity() {
         Snackbar.make(binding.root, R.string.tracking_stopped, Snackbar.LENGTH_SHORT).show()
     }
 }
-EOF
