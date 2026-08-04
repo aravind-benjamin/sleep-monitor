@@ -1,3 +1,4 @@
+cat << 'EOF'
 package com.example.sleepmonitor
 
 import android.Manifest
@@ -9,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.sleepmonitor.data.SleepRepository
 import com.example.sleepmonitor.databinding.ActivityMainBinding
 import com.example.sleepmonitor.service.SleepTrackingService
 import com.example.sleepmonitor.ui.dashboard.DashboardFragment
@@ -19,6 +21,8 @@ import com.google.android.material.snackbar.Snackbar
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var repository: SleepRepository
+    private var isTracking = false
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        repository = SleepRepository(applicationContext)
 
         if (savedInstanceState == null) {
             showFragment(DashboardFragment())
@@ -48,13 +53,32 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        // Reflect whether a session is already running (e.g. app was reopened
+        // while tracking overnight) and keep the FAB in sync as that changes.
+        repository.observeActiveSession().observe(this) { active ->
+            isTracking = active != null
+            updateFabIcon()
+        }
+
         binding.fabTrack.setOnClickListener {
-            if (hasRecordPermission()) {
+            if (isTracking) {
+                stopTrackingService()
+            } else if (hasRecordPermission()) {
                 startTrackingService()
             } else {
                 requestPermissions()
             }
         }
+    }
+
+    private fun updateFabIcon() {
+        binding.fabTrack.setImageResource(
+            if (isTracking) android.R.drawable.ic_media_pause
+            else android.R.drawable.ic_btn_speak_now
+        )
+        binding.fabTrack.contentDescription = getString(
+            if (isTracking) R.string.stop_tracking else R.string.start_tracking
+        )
     }
 
     private fun showFragment(fragment: Fragment) {
@@ -80,4 +104,12 @@ class MainActivity : AppCompatActivity() {
         ContextCompat.startForegroundService(this, intent)
         Snackbar.make(binding.root, R.string.tracking_started, Snackbar.LENGTH_SHORT).show()
     }
+    private fun stopTrackingService() {
+        val intent = Intent(this, SleepTrackingService::class.java).apply {
+            action = SleepTrackingService.ACTION_STOP
+        }
+        startService(intent)
+        Snackbar.make(binding.root, R.string.tracking_stopped, Snackbar.LENGTH_SHORT).show()
+    }
 }
+EOF
